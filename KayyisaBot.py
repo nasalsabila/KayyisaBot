@@ -15,13 +15,11 @@ def start(bot, update):
 def shalat(bot, update, args):
     try:
 	addr = str(args[0])
-	#update.message.reply_text('You live in {}'.format(addr))
 	payload = {'address' : '{}'.format(addr), 'method' : '4'}
 	r = requests.get('http://api.aladhan.com/timingsByAddress', params=payload)
 	data = json.loads(r.content)
 	jadwal = data['data']['timings']
 	for key, value in jadwal.items():
-		#update.message.reply_text('Jadwal{}'.format(value))
 		update.message.reply_text('{} {}'.format(key, value))
 	
     except (IndexError, ValueError):
@@ -37,14 +35,12 @@ def quran(bot, update, args):
 		awal, akhir = a.split('-')
 		akhir = int(akhir)-int(awal)+1
 		r = requests.get('http://api.fathimah.ga/quran/format/json/surat/{}/ayat/{}'.format(s, a))
-		#r = requests.get('http://api.fathimah.ga/quran/format/json/surat/1/ayat/1-5')
 		data=r.content
 		data=json.loads(data)
 		for i in range(akhir):
 			ayat = data['ayat']['data']['ar'][i]['teks'].encode('utf-8')
 			arti = data['ayat']['data']['id'][i]['teks'].encode('utf-8')
 			update.message.reply_text('{}\n{}'.format(ayat, arti))
-			#print ayat, arti
 	else:
 		r = requests.get('http://api.fathimah.ga/quran/format/json/surat/{}/ayat/{}'.format(s, a))
 		data=r.content
@@ -57,12 +53,30 @@ def quran(bot, update, args):
     except (IndexError, ValueError):
         update.message.reply_text('Usage: /quran <surat:ayat>')
 
+def cari(bot, update, args):
+    try:
+	kata = args[0].lower()
+	r = requests.get('http://api.fathimah.ga/quran/format/json/cari/{}'.format(kata))
+	data = json.loads(r.content)
+	for i in range(10):
+		try :
+			carian = data['cari']['id']['data'][i]
+			update.message.reply_text('-Hasil {}-'.format(i+1))
+			for key, value in carian.items():
+				update.message.reply_text('{}{}'.format(key, value))
+		except:
+			None
+	
+    except (IndexError, ValueError):
+        update.message.reply_text('Usage: /cari <kata>')
+	
 
 updater = Updater('SECRET TOKEN')
 
 updater.dispatcher.add_handler(CommandHandler('start', start))
 updater.dispatcher.add_handler(CommandHandler('shalat', shalat, pass_args=True))
 updater.dispatcher.add_handler(CommandHandler('quran', quran, pass_args=True))
+updater.dispatcher.add_handler(CommandHandler('cari', cari, pass_args=True))
 
 updater.start_polling()
 updater.idle()
