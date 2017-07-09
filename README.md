@@ -63,3 +63,4 @@ Kemudian bisa menjalankan kode program bot dengan cara mengetikkan kode ini pada
 python KayyisaBot.py
 ```
 
+GitHub : https://github.com/nasalsabila/KayyisaBot/
