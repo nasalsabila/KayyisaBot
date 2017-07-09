@@ -29,7 +29,7 @@ KayyisaBot dikembangkan dengan bahasa pemrograman python dan didukung API beriku
 - Prayer Times API (https://aladhan.com/prayer-times-api)
 - API Fathimah (api.fathimah.ga)
 
-KayyisaBot juga memanfaatkan data do'a sehari-hari di situs aandazkar.com/chapter-4-daily-essential-duas/.
+KayyisaBot juga memanfaatkan data do'a sehari-hari di situs duaandazkar.com/chapter-4-daily-essential-duas/.
 
 # Cara Penggunaan
 Cari KayyisaBot dengan mengetikkan @KayyisaBot pada kolom search. Kemudian start chat.
