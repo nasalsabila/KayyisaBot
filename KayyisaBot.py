@@ -1,8 +1,13 @@
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, Job
 import requests
 import json
 import re
 import logging
+import time
+import schedule
+import random
+from datetime import datetime, time
+
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
@@ -100,7 +105,6 @@ def cari(bot, update, args):
 		except:
 			None
 	qs = '\n'.join(qs)
-	print qs
 	if qs == '':
 		update.message.reply_text('Tidak ada hasil pencarian untuk kata {}'.format(kata))
 	else:
@@ -179,6 +183,56 @@ def help(bot, update):
 		"\n/doa <nomor do'a> : menampilkan do'a harian yang kamu pilih"
 		"\n/help : bantuan".format(update.message.from_user.first_name))
 
+def alarm(bot, job):
+    """Function to send the alarm message"""
+    try:
+		with open("dailyquran.txt", "r") as f:
+			x=f.readlines() 
+
+		pilihan = x[random.randint(0,len(x)-1)]
+
+		pilihan.split(',')
+		s, a = pilihan.split(':')
+		match = re.match("\d+\-\d*", a)
+		bot.send_message(job.context, text="Assalamu'alaikum! Ayat pilihan hari ini adalah QS.{}:{}".format(s, a))
+		
+		if match is not None:
+			awal, akhir = a.split('-')
+			akhir = int(akhir)-int(awal)+1
+			r = requests.get('http://api.fathimah.ga/quran/format/json/surat/{}/ayat/{}'.format(s, a))
+			data=r.content
+			data=json.loads(data)
+			for i in range(akhir):
+				ayat = data['ayat']['data']['ar'][i]['teks'].encode('utf-8')
+				arti = data['ayat']['data']['id'][i]['teks'].encode('utf-8')
+				bot.send_message(job.context, text='{}\n{}'.format(ayat, arti))
+		else:
+			r = requests.get('http://api.fathimah.ga/quran/format/json/surat/{}/ayat/{}'.format(s, a))
+			data=r.content
+			data=json.loads(data)
+			ayat = data['ayat']['data']['ar'][0]['teks'].encode('utf-8')
+			arti = data['ayat']['data']['id'][0]['teks'].encode('utf-8')
+			bot.send_message(job.context, text='{}\n{}'.format(ayat, arti))
+    except (IndexError, ValueError):
+        bot.send_message(job.context, text='Tidak terdapat ayat pilihan hari ini.')
+    
+
+
+def setdaily(bot, update, job_queue, chat_data):
+    """Adds a job to the queue"""
+    chat_id = update.message.chat_id
+    try:
+        #days = (0, 1, 2, 3, 4, 5, 6)
+        #job = job_queue.run_daily(alarm, time(14, 9), days, context=chat_id)
+	job = job_queue.run_repeating(alarm, 86400, first=60, context=chat_id)
+        chat_data['job'] = job
+
+        update.message.reply_text('Ayat pilihan harian berhasil di-set!')
+
+    except (IndexError, ValueError):
+        update.message.reply_text('Usage: /set')
+
+
 def main():
     updater = Updater('SECRET TOKEN')
     dp = updater.dispatcher
@@ -190,6 +244,10 @@ def main():
     dp.add_handler(CommandHandler('doa', doa, pass_args=True))
     dp.add_handler(CommandHandler('help', help))
     dp.add_handler(MessageHandler(Filters.text, start))
+    dp.add_handler(CommandHandler('setdaily', setdaily,
+                                  pass_job_queue=True,
+                                  pass_chat_data=True))
+    
 
     updater.start_polling()
     updater.idle()
