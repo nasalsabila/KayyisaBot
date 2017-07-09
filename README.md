@@ -62,3 +62,6 @@ Kemudian bisa menjalankan kode program bot dengan cara mengetikkan kode ini pada
 '''python
 python KayyisaBot.py
 '''
+```python
+TOKEN = "<your-token-here>"
+```
