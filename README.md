@@ -52,16 +52,14 @@ Berikut adalah contoh penggunaan KayyisaBot
 # Instalasi
 Untuk menjalankan program bot ini, pertama harus mendaftarkan bot kepada @BotFather dan mendapatkan token-nya.
 Ubah token di bagian ini:
-'''python
-updater = Updater('your-token-here')
-'''
+```python
+updater = Updater('<your-token-here>')
+```
 
 Jika data belum tersedia, jalankan kode scraping.py untuk mendapatkan scraping.json dan file gambar.
 
 Kemudian bisa menjalankan kode program bot dengan cara mengetikkan kode ini pada terminal (pastikan dahulu sudah berada pada direktori yang benar)
-'''python
-python KayyisaBot.py
-'''
 ```python
-TOKEN = "<your-token-here>"
+python KayyisaBot.py
 ```
+
