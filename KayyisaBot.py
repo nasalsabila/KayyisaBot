@@ -3,10 +3,8 @@ import requests
 import json
 import re
 import logging
-import time
-import schedule
 import random
-from datetime import datetime, time
+#from datetime import datetime, time
 
 
 # Enable logging
@@ -24,6 +22,7 @@ def start(bot, update):
 		"\nKirim perintah /cari <kata> untuk menampilkan ayat yang terdapat kata tersebut"
 		"\nKirim perintah /catatan <nomor> untuk menampilkan catatan depag mengenai terjemahan ayat tertentu"
 		"\nKirim perintah /doa <nomor do'a> untuk menampilkan do'a harian yang kamu pilih"
+		"\nKirim perintah /setdaily untuk mendapat kiriman ayat pilihan tiap hari"
 		"\nKirim perintah /help untuk bantuan".format(update.message.from_user.first_name))
 
 # Menampilkan jadwal shalat hari ini
@@ -90,7 +89,6 @@ def quran(bot, update, args):
 # Menampilkan pencarian kata pada Al-Qur'an
 def cari(bot, update, args):
     try:
-	#kata = args[]
 	kata = args[0].lower()
 	r = requests.get('http://api.fathimah.ga/quran/format/json/cari/{}/bahasa/id/mulai/0/limit/100'.format(kata))
 
@@ -181,42 +179,39 @@ def help(bot, update):
 		"\n/cari <kata> : menampilkan ayat yang terdapat kata tersebut"
 		"\n/catatan <nomor> : menampilkan catatan depag mengenai terjemahan ayat tertentu"
 		"\n/doa <nomor do'a> : menampilkan do'a harian yang kamu pilih"
+		"\n/setdaily : mendapat kiriman ayat pilihan tiap hari"
 		"\n/help : bantuan".format(update.message.from_user.first_name))
 
 def alarm(bot, job):
     """Function to send the alarm message"""
-    try:
-		with open("dailyquran.txt", "r") as f:
-			x=f.readlines() 
+    with open("dailyquran.txt", "r") as f:
+    	x=f.readlines() 
 
-		pilihan = x[random.randint(0,len(x)-1)]
+    pilihan = x[random.randint(0,len(x)-1)]
 
-		pilihan.split(',')
-		s, a = pilihan.split(':')
-		match = re.match("\d+\-\d*", a)
-		bot.send_message(job.context, text="Assalamu'alaikum! Ayat pilihan hari ini adalah QS.{}:{}".format(s, a))
+    pilihan.split(',')
+    s, a = pilihan.split(':')
+    match = re.match("\d+\-\d*", a)
+    bot.send_message(job.context, text="Assalamu'alaikum! Ayat pilihan hari ini adalah QS.{}:{}".format(s, a))
 		
-		if match is not None:
-			awal, akhir = a.split('-')
-			akhir = int(akhir)-int(awal)+1
-			r = requests.get('http://api.fathimah.ga/quran/format/json/surat/{}/ayat/{}'.format(s, a))
-			data=r.content
-			data=json.loads(data)
-			for i in range(akhir):
-				ayat = data['ayat']['data']['ar'][i]['teks'].encode('utf-8')
-				arti = data['ayat']['data']['id'][i]['teks'].encode('utf-8')
-				bot.send_message(job.context, text='{}\n{}'.format(ayat, arti))
-		else:
-			r = requests.get('http://api.fathimah.ga/quran/format/json/surat/{}/ayat/{}'.format(s, a))
-			data=r.content
-			data=json.loads(data)
-			ayat = data['ayat']['data']['ar'][0]['teks'].encode('utf-8')
-			arti = data['ayat']['data']['id'][0]['teks'].encode('utf-8')
-			bot.send_message(job.context, text='{}\n{}'.format(ayat, arti))
-    except (IndexError, ValueError):
-        bot.send_message(job.context, text='Tidak terdapat ayat pilihan hari ini.')
+    if match is not None:
+    	awal, akhir = a.split('-')
+	akhir = int(akhir)-int(awal)+1
+	r = requests.get('http://api.fathimah.ga/quran/format/json/surat/{}/ayat/{}'.format(s, a))
+	data=r.content
+	data=json.loads(data)
+	for i in range(akhir):
+		ayat = data['ayat']['data']['ar'][i]['teks'].encode('utf-8')
+		arti = data['ayat']['data']['id'][i]['teks'].encode('utf-8')
+		bot.send_message(job.context, text='{}\n{}'.format(ayat, arti))
+    else:
+	r = requests.get('http://api.fathimah.ga/quran/format/json/surat/{}/ayat/{}'.format(s, a))
+	data=r.content
+	data=json.loads(data)
+	ayat = data['ayat']['data']['ar'][0]['teks'].encode('utf-8')
+	arti = data['ayat']['data']['id'][0]['teks'].encode('utf-8')
+	bot.send_message(job.context, text='{}\n{}'.format(ayat, arti))
     
-
 
 def setdaily(bot, update, job_queue, chat_data):
     """Adds a job to the queue"""
@@ -224,17 +219,22 @@ def setdaily(bot, update, job_queue, chat_data):
     try:
         #days = (0, 1, 2, 3, 4, 5, 6)
         #job = job_queue.run_daily(alarm, time(14, 9), days, context=chat_id)
-	job = job_queue.run_repeating(alarm, 86400, first=60, context=chat_id)
+	job = job_queue.run_repeating(alarm, 86400, first=15, context=chat_id)
         chat_data['job'] = job
 
-        update.message.reply_text('Ayat pilihan harian berhasil di-set!')
+        update.message.reply_text('Kirim ayat pilihan harian berhasil di-set!')
 
     except (IndexError, ValueError):
-        update.message.reply_text('Usage: /set')
+        update.message.reply_text('Usage: /setdaily')
 
+def unknown(bot, update):
+    bot.sendMessage(chat_id=update.message.chat_id, text="Maaf, command yang kamu masukkan tidak ada. Kirim perintah /help untuk bantuan.")
+
+def error(bot, update, error):
+    logger.warning('Update "%s" caused error "%s"' % (update, error))
 
 def main():
-    updater = Updater('SECRET TOKEN')
+    updater = Updater('388036847:AAHSCYGwKW26cx84lGYqEm_ZlUqNvIlisao')
     dp = updater.dispatcher
     dp.add_handler(CommandHandler('start', start))
     dp.add_handler(CommandHandler('shalat', shalat, pass_args=True))
@@ -248,6 +248,8 @@ def main():
                                   pass_job_queue=True,
                                   pass_chat_data=True))
     
+    dp.add_handler(MessageHandler([Filters.command], unknown))    
+    dp.add_error_handler(error)
 
     updater.start_polling()
     updater.idle()
