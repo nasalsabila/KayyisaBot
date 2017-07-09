@@ -45,5 +45,5 @@ Terdapat beberapa perintah/commands pada KayyisaBot, yaitu:
 
 ![example]
 
-[example]: http://imgur.com/6NLQwG2 "Contoh percakapan"
+[example]: http://imgur.com/6NLQwG2.png "Contoh percakapan"
 
