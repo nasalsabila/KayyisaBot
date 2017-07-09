@@ -64,9 +64,11 @@ python KayyisaBot.py
 ```
 
 Apabila ada yang ingin memanfaatkan kode program KayyisaBot, silakan manfaatkan dengan baik, ya. Kalau untuk tugas kuliah, jangan dicopy paste semua! Buat belajar aja :)
+
 Menemukan banyak kode yang kurang tepat atau sebagainya? Ayo kita sharing!
-Email : nasalsabil23@gmail.com
+Kirim email aja ke nasalsabil23@gmail.com
 
 
 Salam,
+
 Empunya GitHub https://github.com/nasalsabila/KayyisaBot/ yang masih belajar mencintai coding
