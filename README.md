@@ -34,28 +34,15 @@ KayyisaBot juga memanfaatkan data do'a sehari-hari di situs duaandazkar.com/chap
 # Cara Penggunaan
 Cari KayyisaBot dengan mengetikkan @KayyisaBot pada kolom search. Kemudian start chat.
 Terdapat beberapa perintah/commands pada KayyisaBot, yaitu:
-/start = menampilkan informasi mengenai KayyisaBot
-  Kirim perintah **/start**
-/shalat = menampilkan jadwal shalat hari ini sesuai masukan wilayah dari pengguna
-  Kirim perintah **/shalat <wilayah>**
-  Contoh : /shalat Bekasi Utara
-/quran = menampilkan ayat Al-Qur'an yang diinginkan pengguna
-  Kirim perintah **/quran <surat:ayat>**
-  Contoh : /quran 2:255-256
-/cari = mencari kata tertentu dalam Al-Qur'an. Bot akan menampilkan list surat dan ayatnya
-  Kirim perintah **/cari <kata>**
-  Contoh : /cari puasa
-/catatan = menampilkan catatan depag mengenai terjemahan ayat tertentu
-  Kirim perintah **/catatan <nomor>**
-  Contoh : /catatan 5
-/doa = menampilkan do'a yang diinginkan pengguna sesuai daftar do'a yang ada
-  Kirim perintah **/doa <nomor>**
-  Contoh : /doa 1
-/setdaily = pengguna set perintah pada bot untuk mengirim ayat pilihan tiap hari
-  Kirim perintah **/setdaily**
-/help = bantuan
-  Kirim perintah **/help**
+- /start = menampilkan informasi mengenai KayyisaBot. Kirim perintah **/start**
+- /shalat = menampilkan jadwal shalat hari ini sesuai masukan wilayah dari pengguna. Kirim perintah **/shalat <wilayah>**. Contoh : /shalat Bekasi Utara
+- /quran = menampilkan ayat Al-Qur'an yang diinginkan pengguna. Kirim perintah **/quran <surat:ayat>**. Contoh : /quran 2:255-256
+- /cari = mencari kata tertentu dalam Al-Qur'an. Bot akan menampilkan list surat dan ayatnya. Kirim perintah **/cari <kata>**. Contoh : /cari puasa
+- /catatan = menampilkan catatan depag mengenai terjemahan ayat tertentu. Kirim perintah **/catatan <nomor>**. Contoh : /catatan 5
+- /doa = menampilkan do'a yang diinginkan pengguna sesuai daftar do'a yang ada. Kirim perintah **/doa <nomor>**. Contoh : /doa 1
+- /setdaily = pengguna set perintah pada bot untuk mengirim ayat pilihan tiap hari. Kirim perintah **/setdaily**
+- /help = bantuan. Kirim perintah **/help**
 
 ![example]
-[example]: http://imgur.com/a/vKbms "Contoh percakapan"
+[example]: http://imgur.com/6NLQwG2 "Contoh percakapan"
 
