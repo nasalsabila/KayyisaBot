@@ -63,4 +63,10 @@ Kemudian bisa menjalankan kode program bot dengan cara mengetikkan kode ini pada
 python KayyisaBot.py
 ```
 
-GitHub : https://github.com/nasalsabila/KayyisaBot/
+Apabila ada yang ingin memanfaatkan kode program KayyisaBot, silakan manfaatkan dengan baik, ya. Kalau untuk tugas kuliah, jangan dicopy paste semua! Buat belajar aja :)
+Menemukan banyak kode yang kurang tepat atau sebagainya? Ayo kita sharing!
+Email : nasalsabil23@gmail.com
+
+
+Salam,
+Empunya GitHub https://github.com/nasalsabila/KayyisaBot/ yang masih belajar mencintai coding
