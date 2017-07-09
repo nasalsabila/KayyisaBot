@@ -11,6 +11,7 @@ Dibuat oleh : Nikmatun Aliyah Salsabila - 0102514014
 
 - [Deskripsi](#deskripsi)
 - [Cara Penggunaan Bot](#cara-penggunaan)
+- [Instalasi](#instalasi)
 
 <!-- markdown-toc end -->
 
@@ -31,7 +32,7 @@ KayyisaBot dikembangkan dengan bahasa pemrograman python dan didukung API beriku
 
 KayyisaBot juga memanfaatkan data do'a sehari-hari di situs http://duaandazkar.com/chapter-4-daily-essential-duas/.
 
-# Cara Penggunaan
+# Cara Penggunaan Bot
 Cari KayyisaBot dengan mengetikkan @KayyisaBot pada kolom search. Kemudian start chat.
 Terdapat beberapa perintah/commands pada KayyisaBot, yaitu:
 - /start = menampilkan informasi mengenai KayyisaBot. Contoh : /start
@@ -47,3 +48,17 @@ Berikut adalah contoh penggunaan KayyisaBot
 ![example]
 
 [example]: http://imgur.com/6NLQwG2.png "Contoh percakapan"
+
+# Instalasi
+Untuk menjalankan program bot ini, pertama harus mendaftarkan bot kepada @BotFather dan mendapatkan token-nya.
+Ubah token di bagian ini:
+'''python
+updater = Updater('your-token-here')
+'''
+
+Jika data belum tersedia, jalankan kode scraping.py untuk mendapatkan scraping.json dan file gambar.
+
+Kemudian bisa menjalankan kode program bot dengan cara mengetikkan kode ini pada terminal (pastikan dahulu sudah berada pada direktori yang benar)
+'''python
+python KayyisaBot.py
+'''
