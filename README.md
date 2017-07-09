@@ -44,5 +44,6 @@ Terdapat beberapa perintah/commands pada KayyisaBot, yaitu:
 - /help = bantuan. Kirim perintah **/help**
 
 ![example]
+
 [example]: http://imgur.com/6NLQwG2 "Contoh percakapan"
 
