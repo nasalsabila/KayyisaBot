@@ -25,11 +25,11 @@ depag mengenai terjemahan ayat dan mencari kata dalam Al-Qur'an, sehingga bot ak
 menampilkan list surat dan ayatnya.
 
 KayyisaBot dikembangkan dengan bahasa pemrograman python dan didukung API berikut:
-- python-telegram-bot (python-telegram-bot.org)
+- python-telegram-bot (http://python-telegram-bot.org)
 - Prayer Times API (https://aladhan.com/prayer-times-api)
-- API Fathimah (api.fathimah.ga)
+- API Fathimah (http://api.fathimah.ga)
 
-KayyisaBot juga memanfaatkan data do'a sehari-hari di situs duaandazkar.com/chapter-4-daily-essential-duas/.
+KayyisaBot juga memanfaatkan data do'a sehari-hari di situs http://duaandazkar.com/chapter-4-daily-essential-duas/.
 
 # Cara Penggunaan
 Cari KayyisaBot dengan mengetikkan @KayyisaBot pada kolom search. Kemudian start chat.
@@ -43,7 +43,12 @@ Terdapat beberapa perintah/commands pada KayyisaBot, yaitu:
 - /setdaily = pengguna set perintah pada bot untuk mengirim ayat pilihan tiap hari. Kirim perintah **/setdaily**
 - /help = bantuan. Kirim perintah **/help**
 
+Berikut adalah contoh penggunaan KayyisaBot
 ![example]
 
 [example]: http://imgur.com/6NLQwG2.png "Contoh percakapan"
 
+
+Salam,
+
+nasalsabila
