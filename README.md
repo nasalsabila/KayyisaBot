@@ -10,7 +10,7 @@ Dibuat oleh : Nikmatun Aliyah Salsabila - 0102514014
 **Daftar isi**
 
 - [Deskripsi](#deskripsi)
-- [Cara Penggunaan Bot](#cara-penggunaan)
+- [Cara Penggunaan Bot](#cara-penggunaan-bot)
 - [Instalasi](#instalasi)
 
 <!-- markdown-toc end -->
